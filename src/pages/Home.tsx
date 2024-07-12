@@ -9,18 +9,7 @@ import InputText from "../shared/components/InputText";
 const COUNT = 10000;
 
 function Home() {
-  return (
-    <>
-      <Title size="small" color="background">
-        제목 테스트
-      </Title>
-      <Button size="large" scheme="normal">
-        버튼 테스트
-      </Button>
-      <InputText placeholder="텍스트를 입력해주세요" />
-      <div>count : {formatNumber(COUNT)}</div>
-    </>
-  );
+  return <>homebody</>;
 }
 
 export default memo(Home);
