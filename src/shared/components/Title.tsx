@@ -9,7 +9,11 @@ interface Props {
 }
 
 function Title({ children, size, color }: Props) {
-  return <TitleStyle size={size}>{children}</TitleStyle>;
+  return (
+    <TitleStyle size={size} color={color}>
+      {children}
+    </TitleStyle>
+  );
 }
 
 const TitleStyle = styled.h1<Omit<Props, "children">>`
