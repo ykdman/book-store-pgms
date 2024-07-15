@@ -21,7 +21,7 @@ const FooterStyle = styled.footer`
   max-width: ${({ theme }) => theme.layout.width.large};
 
   border-top: 1px solid ${({ theme }) => theme.color.border};
-  padding: 20px;
+  padding: 20px 0;
 
   display: flex;
   justify-content: space-between;

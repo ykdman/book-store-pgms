@@ -1,19 +1,29 @@
 import React, { memo } from "react";
 import Headers from "../shared/components/Header/Headers";
 import Footer from "../shared/components/Footer";
+import styled from "styled-components";
+import { Outlet } from "react-router-dom";
 
-interface LayoutProps {
-  children: React.ReactNode;
+interface Props {
+  children?: React.ReactNode;
 }
 
-function Layout({ children }: LayoutProps) {
+function Layout({ children }: Props) {
   return (
     <>
       <Headers />
-      <main>{children}</main>
+      <LayoutStyle>{children || <Outlet />}</LayoutStyle>
       <Footer />
     </>
   );
 }
+
+const LayoutStyle = styled.main`
+  width: 100%;
+  margin: 0 auto;
+  max-width: ${({ theme }) => theme.layout.width.large};
+
+  padding: 20px 0;
+`;
 
 export default memo(Layout);

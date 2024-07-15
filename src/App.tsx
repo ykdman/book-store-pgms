@@ -7,6 +7,24 @@ import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme, ThemeName, getTheme } from "./style/theme";
 import ThemeSwitcher from "./shared/components/Header/ThemeSwitcher/ThemeSwitcher";
 import { BookStoreThemeProvider, ThemeContext } from "./context/theme";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Error from "./shared/components/Error";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: (
+      <Layout>
+        <Error />
+      </Layout>
+    ),
+    children: [
+      { index: true, element: <Home /> },
+      { path: "/books", element: <div>도서목록</div> },
+    ],
+  },
+]);
 
 function App() {
   // const [themeName, setThemeName] = useState<ThemeName>("light");
@@ -14,9 +32,7 @@ function App() {
 
   return (
     <BookStoreThemeProvider>
-      <Layout>
-        <Home />
-      </Layout>
+      <RouterProvider router={router} />
     </BookStoreThemeProvider>
   );
 }
