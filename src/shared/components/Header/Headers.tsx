@@ -1,30 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaSignInAlt, FaRegUser } from "react-icons/fa";
 
 import logo from "../../../assets/img/bookstorelogo1.svg";
 import { Link } from "react-router-dom";
+import { Category } from "../../models";
+import { fetchCategory } from "../../api/category.api";
+import { useCategory } from "../../../hooks/useCategory";
 
-const CATEGORY = [
-  {
-    id: null,
-    name: "전체",
-  },
-  {
-    id: 1,
-    name: "동화",
-  },
-  {
-    id: 2,
-    name: "소설",
-  },
-  {
-    id: 3,
-    name: "사회",
-  },
-];
+// const CATEGORY = [
+//   {
+//     id: null,
+//     name: "전체",
+//   },
+//   {
+//     id: 1,
+//     name: "동화",
+//   },
+//   {
+//     id: 2,
+//     name: "소설",
+//   },
+//   {
+//     id: 3,
+//     name: "사회",
+//   },
+// ];
 
 function Headers() {
+  const { categories } = useCategory();
   return (
     <HeaderStyle>
       <h1 className="logo">
@@ -32,7 +36,7 @@ function Headers() {
       </h1>
       <nav className="category">
         <ul>
-          {CATEGORY.map((category) => (
+          {categories.map((category) => (
             <li key={category.id}>
               <Link
                 to={
