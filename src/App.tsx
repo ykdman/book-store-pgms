@@ -9,6 +9,7 @@ import ThemeSwitcher from "./shared/components/Header/ThemeSwitcher/ThemeSwitche
 import { BookStoreThemeProvider, ThemeContext } from "./context/theme";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error from "./shared/components/Error";
+import Signup from "./pages/Signup";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/books", element: <div>도서목록</div> },
+      { path: "/signup", element: <Signup /> },
     ],
   },
 ]);
