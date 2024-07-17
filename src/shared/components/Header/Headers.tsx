@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { FaSignInAlt, FaRegUser } from "react-icons/fa";
 
 import logo from "../../../assets/img/bookstorelogo1.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Category } from "../../models";
 import { fetchCategory } from "../../api/category.api";
 import { useCategory } from "../../../hooks/useCategory";
+import { useAuthStore } from "../../../store/authStore";
 
 // const CATEGORY = [
 //   {
@@ -29,6 +30,8 @@ import { useCategory } from "../../../hooks/useCategory";
 
 function Headers() {
   const { categories } = useCategory();
+  const { isLoggedIn, storeLogout } = useAuthStore();
+  const naviagate = useNavigate();
   return (
     <HeaderStyle>
       <h1 className="logo">
@@ -52,20 +55,42 @@ function Headers() {
         </ul>
       </nav>
       <nav className="auth">
-        <ul>
-          <li>
-            <a href="/login">
-              <FaSignInAlt />
-              로그인
-            </a>
-          </li>
-          <li>
-            <a href="/signup">
-              <FaRegUser />
-              회원가입
-            </a>
-          </li>
-        </ul>
+        {isLoggedIn && (
+          <ul>
+            <li>
+              <Link to="/cart">장바구니</Link>
+            </li>
+            <li>
+              <Link to="/orderlist">주문내역</Link>
+            </li>
+            <li>
+              <button
+                onClick={() => {
+                  storeLogout();
+                  naviagate("/login");
+                }}
+              >
+                로그아웃
+              </button>
+            </li>
+          </ul>
+        )}
+        {!isLoggedIn && (
+          <ul>
+            <li>
+              <a href="/login">
+                <FaSignInAlt />
+                로그인
+              </a>
+            </li>
+            <li>
+              <a href="/signup">
+                <FaRegUser />
+                회원가입
+              </a>
+            </li>
+          </ul>
+        )}
       </nav>
     </HeaderStyle>
   );
@@ -113,7 +138,8 @@ const HeaderStyle = styled.header`
       display: flex;
       gap: 16px;
       li {
-        a {
+        a,
+        button {
           font-size: 1rem;
           font-weight: 600;
           text-decoration: none;
@@ -121,7 +147,9 @@ const HeaderStyle = styled.header`
           display: flex;
           align-items: center;
           line-height: 1;
-
+          background: none;
+          border: 0;
+          cursor: pointer;
           svg {
             margin-right: 2px;
           }
