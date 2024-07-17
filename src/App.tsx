@@ -11,6 +11,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error from "./shared/components/Error";
 import Signup from "./pages/Signup";
 import ResetPassword from "./pages/ResetPassword";
+import Login from "./pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/books", element: <div>도서목록</div> },
+      { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
       { path: "/reset", element: <ResetPassword /> },
     ],
