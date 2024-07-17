@@ -5,7 +5,7 @@ const BASE_URL = "http://localhost:8888";
 const DEFAULT_TIMEOUT = 30000;
 
 export const createClient = (config?: AxiosRequestConfig) => {
-  const axiosInstace = axios.create({
+  const axiosInstance = axios.create({
     baseURL: BASE_URL,
     timeout: DEFAULT_TIMEOUT,
     headers: {
@@ -14,7 +14,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
     withCredentials: true,
     ...config,
   });
-  axiosInstace.interceptors.response.use(
+  axiosInstance.interceptors.response.use(
     (response) => {
       return response;
     },
@@ -22,7 +22,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
       return Promise.reject(error);
     }
   );
-  return axiosInstace;
+  return axiosInstance;
 };
 
 export const httpClient = createClient();
