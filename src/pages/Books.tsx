@@ -8,26 +8,43 @@ import {
   Pagination,
 } from "../features/books/ui";
 import BooksList from "../features/books/ui/BooksList";
+import { useBooks } from "../hooks/useBooks";
 
 function Books() {
+  const { books, pagination, isEmpty } = useBooks();
+  console.log("books", books);
+  console.log("pagination", pagination);
   return (
     <>
       <Title size="large">도서 검색 결과</Title>
       <BooksStyle>
         {/* 필터 */}
-        <BooksFilter />
-        <BooksViewSwitcher />
+        <div className="filter">
+          <BooksFilter />
+          <BooksViewSwitcher />
+        </div>
         {/* 목록 */}
-        <BooksList />
+        {!isEmpty && <BooksList books={books} />}
         {/* Empty */}
-        <BooksEmpty />
+        {isEmpty && <BooksEmpty />}
         {/* 페이지네이션 */}
-        <Pagination />
+        {!isEmpty && <Pagination pagination={pagination} />}
       </BooksStyle>
     </>
   );
 }
 
-const BooksStyle = styled.section``;
+const BooksStyle = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  .filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+  }
+`;
 
 export default Books;
