@@ -14,7 +14,7 @@ interface Props {
 function BookItem({ book, view }: Props) {
   console.log(view);
   return (
-    <BookItemStyle>
+    <BookItemStyle view={view}>
       <div className="img">
         <img src={getImgSrc(book.img)} alt={book.title} />
       </div>
