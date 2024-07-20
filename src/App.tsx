@@ -13,6 +13,7 @@ import Signup from "./pages/Signup";
 import ResetPassword from "./pages/ResetPassword";
 import Login from "./pages/Login";
 import Books from "./pages/Books";
+import BookDetail from "./pages/BookDetail";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/books", element: <Books /> },
+      { path: "/books/:bookId", element: <BookDetail /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
       { path: "/reset", element: <ResetPassword /> },

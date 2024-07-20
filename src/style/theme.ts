@@ -9,7 +9,7 @@ export type ColorKey =
 export type HeadingSize = "small" | "medium" | "large";
 export type ButtonSize = "small" | "medium" | "large";
 
-export type ButtonScheme = "primary" | "normal";
+export type ButtonScheme = "primary" | "normal" | "like";
 
 export type LayoutWidth = "large" | "medium" | "small";
 
@@ -86,6 +86,10 @@ export const lightTheme: Theme = {
     normal: {
       color: "black",
       backgroundColor: "lightgray",
+    },
+    like: {
+      color: "white",
+      backgroundColor: "coral",
     },
   },
   borderRadius: {
