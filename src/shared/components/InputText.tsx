@@ -16,8 +16,8 @@ const InputText = React.forwardRef(
         placeholder={placeholder}
         ref={ref}
         type={inputType}
-        {...props}
         onChange={onChange}
+        {...props}
       />
     );
   }

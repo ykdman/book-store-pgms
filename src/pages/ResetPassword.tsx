@@ -22,7 +22,7 @@ function ResetPassword() {
   };
 
   const navigate = useNavigate();
-  const showAlert = useAlert();
+  const { showAlert } = useAlert();
 
   const {
     register,
