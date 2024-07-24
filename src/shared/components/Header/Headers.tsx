@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { FaSignInAlt, FaRegUser } from "react-icons/fa";
+import { FaSignInAlt, FaRegUser, FaUserCircle } from "react-icons/fa";
 
 import logo from "../../../assets/img/bookstorelogo1.svg";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import { Category } from "../../models";
 import { fetchCategory } from "../../api/category.api";
 import { useCategory } from "../../../hooks/useCategory";
 import { useAuthStore } from "../../../store/authStore";
+import Dropdown from "../Dropdown";
+import ThemeSwitcher from "./ThemeSwitcher/ThemeSwitcher";
 
 // const CATEGORY = [
 //   {
@@ -55,42 +57,45 @@ function Headers() {
         </ul>
       </nav>
       <nav className="auth">
-        {isLoggedIn && (
-          <ul>
-            <li>
-              <Link to="/carts">장바구니</Link>
-            </li>
-            <li>
-              <Link to="/orderlist">주문내역</Link>
-            </li>
-            <li>
-              <button
-                onClick={() => {
-                  storeLogout();
-                  naviagate("/login");
-                }}
-              >
-                로그아웃
-              </button>
-            </li>
-          </ul>
-        )}
-        {!isLoggedIn && (
-          <ul>
-            <li>
-              <a href="/login">
-                <FaSignInAlt />
-                로그인
-              </a>
-            </li>
-            <li>
-              <a href="/signup">
-                <FaRegUser />
-                회원가입
-              </a>
-            </li>
-          </ul>
-        )}
+        <Dropdown toggleButton={<FaUserCircle />}>
+          {isLoggedIn && (
+            <ul>
+              <li>
+                <Link to="/carts">장바구니</Link>
+              </li>
+              <li>
+                <Link to="/orderlist">주문내역</Link>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    storeLogout();
+                    naviagate("/login");
+                  }}
+                >
+                  로그아웃
+                </button>
+              </li>
+            </ul>
+          )}
+          {!isLoggedIn && (
+            <ul>
+              <li>
+                <a href="/login">
+                  <FaSignInAlt />
+                  로그인
+                </a>
+              </li>
+              <li>
+                <a href="/signup">
+                  <FaRegUser />
+                  회원가입
+                </a>
+              </li>
+            </ul>
+          )}
+          <ThemeSwitcher />
+        </Dropdown>
       </nav>
     </HeaderStyle>
   );
@@ -136,6 +141,8 @@ const HeaderStyle = styled.header`
   .auth {
     ul {
       display: flex;
+      flex-direction: column;
+      width: 100px;
       gap: 16px;
       li {
         a,
@@ -146,6 +153,8 @@ const HeaderStyle = styled.header`
 
           display: flex;
           align-items: center;
+          justify-content: center;
+          width: 100%;
           line-height: 1;
           background: none;
           border: 0;
