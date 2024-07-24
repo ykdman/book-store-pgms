@@ -9,6 +9,7 @@ import { login, signup } from "../shared/api/auth.api";
 import { useAlert } from "../hooks/useAlert";
 import { SignupStyle } from "./Signup";
 import { useAuthStore } from "../store/authStore";
+import { useAuth } from "@/hooks/useAuth";
 
 export interface SignupProps {
   email: string;
@@ -19,6 +20,7 @@ function Login() {
   const navigate = useNavigate();
   const { showAlert } = useAlert();
   const { isLoggedIn, storeLogin, storeLogout } = useAuthStore();
+  const { userLogin } = useAuth();
   const {
     register,
     handleSubmit,
@@ -26,20 +28,7 @@ function Login() {
   } = useForm<SignupProps>();
 
   const onSubmit = (data: SignupProps) => {
-    login(data).then(
-      (res) => {
-        //상태변화
-        storeLogin(res.token);
-        // localStorage.setItem("token", res.token)
-
-        showAlert("로그인 완료되었습니다.");
-
-        navigate("/");
-      },
-      (error) => {
-        showAlert("로그인에 실패 했습니다.");
-      }
-    );
+    userLogin(data);
   };
 
   return (

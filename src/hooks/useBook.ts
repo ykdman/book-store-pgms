@@ -4,6 +4,8 @@ import { fetchBook, likeBook, unlikeBook } from "../shared/api/books.api";
 import { useAuthStore } from "../store/authStore";
 import { useAlert } from "./useAlert";
 import { addCart } from "../shared/api/carts.api";
+import { BookReviewItem } from "@/shared/models/book.model";
+import { fetchBookReview } from "@/shared/api/review.api";
 
 export const useBook = (bookId: string | undefined) => {
   const [book, setBook] = useState<BookDetail | null>(null);
@@ -11,6 +13,9 @@ export const useBook = (bookId: string | undefined) => {
   const { showAlert } = useAlert();
 
   const [cartAdded, setCartAdded] = useState<boolean>(false);
+
+  //review
+  const [reviews, setReviews] = useState<BookReviewItem[]>([]);
 
   const addToCart = (quantity: number) => {
     if (!book) return;
@@ -56,7 +61,9 @@ export const useBook = (bookId: string | undefined) => {
   useEffect(() => {
     if (!bookId) return;
     fetchBook(bookId).then((book) => setBook(book));
+
+    fetchBookReview(bookId).then((reviews) => setReviews(reviews));
   }, [bookId]);
 
-  return { book, likeToggle, addToCart, cartAdded };
+  return { book, likeToggle, addToCart, cartAdded, reviews };
 };

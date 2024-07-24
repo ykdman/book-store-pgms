@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { BookDetail } from "../../shared/models";
-import Button from "../../shared/components/Button";
+import { BookDetail } from "../../../shared/models";
+import Button from "../../../shared/components/Button";
 import { FaHeart } from "react-icons/fa";
 
 interface Props {

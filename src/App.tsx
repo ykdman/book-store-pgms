@@ -17,6 +17,8 @@ import BookDetail from "./pages/BookDetail";
 import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import OrderList from "./pages/OrderList";
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "./shared/api/queryClient";
 
 const router = createBrowserRouter([
   {
@@ -46,9 +48,11 @@ function App() {
   const { themeName, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <BookStoreThemeProvider>
-      <RouterProvider router={router} />
-    </BookStoreThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <BookStoreThemeProvider>
+        <RouterProvider router={router} />
+      </BookStoreThemeProvider>
+    </QueryClientProvider>
   );
 }
 

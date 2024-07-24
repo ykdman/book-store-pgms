@@ -9,11 +9,21 @@ import {
 } from "../features/books/ui";
 import BooksList from "../features/books/ui/BooksList";
 import { useBooks } from "../hooks/useBooks";
+import Loading from "@/shared/components/Loading";
 
 function Books() {
-  const { books, pagination, isEmpty } = useBooks();
+  const { books, pagination, isEmpty, isBookLoading } = useBooks();
   console.log("books", books);
   console.log("pagination", pagination);
+
+  if (isEmpty) {
+    return <BooksEmpty />;
+  }
+
+  if (!books || !pagination || isBookLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <Title size="large">도서 검색 결과</Title>
@@ -24,11 +34,8 @@ function Books() {
           <BooksViewSwitcher />
         </div>
         {/* 목록 */}
-        {!isEmpty && <BooksList books={books} />}
-        {/* Empty */}
-        {isEmpty && <BooksEmpty />}
-        {/* 페이지네이션 */}
-        {!isEmpty && <Pagination pagination={pagination} />}
+        <BooksList books={books} />
+        <Pagination pagination={pagination} />
       </BooksStyle>
     </>
   );

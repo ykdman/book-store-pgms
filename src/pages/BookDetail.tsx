@@ -8,8 +8,9 @@ import { BookDetail as IBookDetail } from "../shared/models";
 import { formatDate, formatNumber } from "../utils/format";
 import { Link } from "react-router-dom";
 import ElipsisBox from "../shared/components/ElipsisBox";
-import LikeButton from "../features/books/LikeButton";
+import LikeButton from "../features/books/ui/LikeButton";
 import AddToCart from "../features/books/ui/AddToCart";
+import BookReview from "@/features/books/ui/BookReview";
 
 const bookInfoList = [
   {
@@ -51,7 +52,9 @@ const bookInfoList = [
 
 function BookDetail() {
   const { bookId } = useParams();
-  const { book, likeToggle } = useBook(bookId);
+  const { book, likeToggle, reviews } = useBook(bookId);
+
+  console.log(reviews);
 
   // Early Return
   if (!book) return null;
@@ -90,6 +93,9 @@ function BookDetail() {
 
         <Title size="medium">목차</Title>
         <p className="index">{book.contents}</p>
+
+        <Title size="medium">리뷰</Title>
+        <BookReview reviews={reviews} />
       </div>
     </BookDetailStyle>
   );
