@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useBook } from "../hooks/useBook";
@@ -12,6 +12,7 @@ import LikeButton from "../features/books/ui/LikeButton";
 import AddToCart from "../features/books/ui/AddToCart";
 import BookReview from "@/features/books/ui/BookReview";
 import { Tab, Tabs } from "@/shared/components/Tabs";
+import Modal from "@/shared/components/Modal";
 
 const bookInfoList = [
   {
@@ -55,7 +56,7 @@ function BookDetail() {
   const { bookId } = useParams();
   const { book, likeToggle, reviews, addReview } = useBook(bookId);
 
-  console.log(reviews);
+  const [isImgOpen, setIsImgOpen] = useState<boolean>(false);
 
   // Early Return
   if (!book) return null;
@@ -63,7 +64,16 @@ function BookDetail() {
   return (
     <BookDetailStyle>
       <header className="header">
-        <img src={getImgSrc(book.img, 500, 600)} alt={book.title} />
+        <div className="img">
+          <img
+            src={getImgSrc(book.img, 500, 600)}
+            alt={book.title}
+            onClick={() => setIsImgOpen(true)}
+          />
+        </div>
+        <Modal isOpen={isImgOpen} onClose={() => setIsImgOpen(false)}>
+          <img src={getImgSrc(book.img, 500, 600)} alt={book.title} />
+        </Modal>
 
         <div className="info">
           <Title size="large" color="text">
