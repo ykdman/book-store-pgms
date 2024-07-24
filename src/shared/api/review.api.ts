@@ -1,5 +1,5 @@
 import { reviewsById } from "@/mock/reviews";
-import { BookReviewItem } from "../models/book.model";
+import { BookReviewItem, BookReviewItemWrite } from "../models/book.model";
 import { requestHandler } from "./http";
 // const mockReviewsData: BookReviewItem[] = [
 //   {
@@ -20,11 +20,17 @@ import { requestHandler } from "./http";
 //   },
 // ];
 
+interface AddBookResponse {
+  message: string;
+}
 export const fetchBookReview = async (bookId: string) => {
   // Route 에서 bookId 수신
-  // return await requestHandler<BookReviewItem>("get", `/reviews/${bookId}`);
+  return await requestHandler<BookReviewItem>("get", `/reviews/${bookId}`);
+};
 
-  const response = await fetch(`http://localhost:9999/reviews/${bookId}`);
-  const data = await response.json();
-  return data;
+export const addBookReview = async (
+  bookId: string,
+  data: BookReviewItemWrite
+) => {
+  return await requestHandler<AddBookResponse>("post", `/reviews/${bookId}`);
 };

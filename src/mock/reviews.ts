@@ -13,11 +13,21 @@ const mockReviewsData: BookReviewItem[] = Array.from({ length: 8 }).map(
 );
 
 export const reviewsById = http.get(
-  "http://localhost:9999/reviews/:bookId",
+  "http://localhost:8888/reviews/:bookId",
   () => {
     const data: BookReviewItem[] = mockReviewsData;
     return HttpResponse.json(data, {
       status: 200,
     });
+  }
+);
+
+export const addReview = http.post(
+  "http://localhost:8888/reviews/:bookId",
+  () => {
+    return HttpResponse.json(
+      { message: "리뷰가 등록되었습니다." },
+      { status: 200 }
+    );
   }
 );
