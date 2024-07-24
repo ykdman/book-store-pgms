@@ -19,6 +19,7 @@ import Order from "./pages/Order";
 import OrderList from "./pages/OrderList";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./shared/api/queryClient";
+import ToastContainer from "./features/Toast/ui/ToastContainer";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BookStoreThemeProvider>
         <RouterProvider router={router} />
+        <ToastContainer />
       </BookStoreThemeProvider>
     </QueryClientProvider>
   );

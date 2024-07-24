@@ -11,6 +11,7 @@ import ElipsisBox from "../shared/components/ElipsisBox";
 import LikeButton from "../features/books/ui/LikeButton";
 import AddToCart from "../features/books/ui/AddToCart";
 import BookReview from "@/features/books/ui/BookReview";
+import { Tab, Tabs } from "@/shared/components/Tabs";
 
 const bookInfoList = [
   {
@@ -88,14 +89,21 @@ function BookDetail() {
         </div>
       </header>
       <div className="content">
-        <Title size="medium">상세 설명</Title>
-        <ElipsisBox linelimit={2}>{book.detail}</ElipsisBox>
+        <Tabs>
+          <Tab title="상세설명">
+            <Title size="medium">상세 설명</Title>
+            <ElipsisBox linelimit={2}>{book.detail}</ElipsisBox>
+          </Tab>
+          <Tab title="목차">
+            <Title size="medium">목차</Title>
+            <p className="index">{book.contents}</p>
+          </Tab>
 
-        <Title size="medium">목차</Title>
-        <p className="index">{book.contents}</p>
-
-        <Title size="medium">리뷰</Title>
-        <BookReview onAdd={addReview} reviews={reviews} />
+          <Tab title="리뷰">
+            <Title size="medium">리뷰</Title>
+            <BookReview onAdd={addReview} reviews={reviews} />
+          </Tab>
+        </Tabs>
       </div>
     </BookDetailStyle>
   );
