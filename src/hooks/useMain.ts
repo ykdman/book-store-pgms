@@ -1,6 +1,8 @@
+import { fetchBanners } from "@/shared/api/banner.api";
 import { fetchBeskBooks, fetchBooks } from "@/shared/api/books.api";
 import { fetchReviewAll } from "@/shared/api/review.api";
 import { Book, BookReviewItem } from "@/shared/models";
+import { Banner } from "@/shared/models/banner.model";
 import { useEffect, useState } from "react";
 
 export const useMain = () => {
@@ -8,6 +10,8 @@ export const useMain = () => {
 
   const [newBooks, setNewBooks] = useState<Book[]>([]);
   const [bestBooks, setBestBooks] = useState<Book[]>([]);
+
+  const [banners, setBanners] = useState<Banner[]>([]);
 
   useEffect(() => {
     fetchReviewAll().then((res) => {
@@ -26,7 +30,9 @@ export const useMain = () => {
     fetchBeskBooks().then((res) => {
       setBestBooks(res);
     });
+
+    fetchBanners().then((res) => setBanners(res));
   }, []);
 
-  return { reviews, newBooks, bestBooks };
+  return { reviews, newBooks, bestBooks, banners };
 };

@@ -1,4 +1,5 @@
 import { useMain } from "@/hooks/useMain";
+import Banner from "@/shared/components/Banner/Banner";
 import MainBest from "@/shared/components/Main/MainBest";
 import MainNewBooks from "@/shared/components/Main/MainNewBooks";
 import MainReview from "@/shared/components/Main/MainReview";
@@ -6,13 +7,13 @@ import Title from "@/shared/components/Title";
 import styled from "styled-components";
 
 function Home() {
-  const { reviews, newBooks, bestBooks } = useMain();
-  console.log("베스트 셀러", bestBooks);
+  const { reviews, newBooks, bestBooks, banners } = useMain();
+  console.log("배너", banners);
 
   return (
     <HomeStyle>
       {/* 배너 */}
-
+      <Banner banners={banners} />
       {/* 베스트 셀러 */}
       <section className="section">
         <Title size="large">베스트 셀러</Title>
