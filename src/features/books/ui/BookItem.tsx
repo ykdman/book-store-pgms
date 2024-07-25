@@ -35,7 +35,7 @@ function BookItem({ book, view }: Props) {
   );
 }
 
-const BookItemStyle = styled.div<Pick<Props, "view">>`
+export const BookItemStyle = styled.div<Pick<Props, "view">>`
   a {
     display: flex;
     text-decoration: none;
