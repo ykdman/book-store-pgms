@@ -1,4 +1,5 @@
 import { useMain } from "@/hooks/useMain";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import Banner from "@/shared/components/Banner/Banner";
 import MainBest from "@/shared/components/Main/MainBest";
 import MainNewBooks from "@/shared/components/Main/MainNewBooks";
@@ -8,7 +9,9 @@ import styled from "styled-components";
 
 function Home() {
   const { reviews, newBooks, bestBooks, banners } = useMain();
-  console.log("배너", banners);
+
+  // media
+  const { isMobile } = useMediaQuery();
 
   return (
     <HomeStyle>
